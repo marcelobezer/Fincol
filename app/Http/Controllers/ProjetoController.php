@@ -14,11 +14,11 @@ class ProjetoController extends Controller {
 
     public function cadastrar () {
         return view('projeto.cadastrar');
-//        $proj = new Projeto;
-//        $proj->descricao = Input::get('descricao');
-//        $proj->custo = Input::get('custo');
-//        $proj->duracao = Input::get('duracao');
-//        $proj->save();
+        $proj = new Projeto;
+        $proj->descricao = Input::get('descricao');
+        $proj->custo = Input::get('custo');
+        $proj->duracao = Input::get('duracao');
+        $proj->save();
     }
 
     public function pesquisar () {

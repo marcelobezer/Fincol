@@ -2,7 +2,11 @@
 
 namespace Fincol\Http\Controllers;
 
+session_start();
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
 use Fincol\Projeto;
 use Fincol\Usuario;
 
@@ -18,19 +22,40 @@ class UsuarioController extends Controller {
     }
 
     public function salvar () {
-        $user = new Usuario;
-        $user->nome = Input::get('nome');
-        $user->login = Input::get('login');
-        $user->senha = Input::get('senha');
-        dump($user);
+        $user           =  new Usuario;
+        $user->nome     =  Input::get('nome');
+        $user->login    =  Input::get('login');
+        $user->senha    =  hash('sha256', Input::get('senha'));
         $user->save();
 
-        return redirect('index');
+        return redirect('/');
     }
 
     public function login () {
-        return view('usuario.login');
+        if (array_key_exists('logado', $_SESSION) && $_SESSION['logado'] == true) {
+            $_SESSION['logado'] == false;
+            return redirect('/');
+        }
+        else {
+            return view('usuario.login');
+        }
     }
 
+    public function verificar () {
+        $login      =   Input::get('login');
+        $senha      =   hash('sha256', Input::get('senha'));
+        $results    =   DB::select('select * from usuarios 
+                            where nome = :nome', ['nome' => $login]);
+
+        if (sizeof($results) == 1) {
+            if ($results[0]->senha == $senha) {
+                $_SESSION['logado'] = True;
+                $_SESSION['id']     = $results[0]->id;
+
+                return redirect('/');
+            }
+        }
+        return redirect('usuario/login');
+    }
 
 }

@@ -16,9 +16,11 @@ class CreateUsuariosTable extends Migration
         Schema::create('usuarios', function (Blueprint $table) {
             $table->increments('id');
             $table->string('login', 16);
-            $table->string('senha', 16);
+            $table->string('senha', 64);
             $table->string('nome', 50);
             $table->timestamps();
+
+            $table->unique('login');
         });
     }
 

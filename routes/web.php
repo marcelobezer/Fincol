@@ -23,6 +23,8 @@ Route::post('usuario/cadastrar', 'UsuarioController@salvar');
 
 Route::get('usuario/login', 'UsuarioController@login');
 
+Route::post('usuario/login', 'UsuarioController@verificar');
+
 Route::get('projeto/{id}', 'ProjetoController@show')->where('id', '[0-9]+');
 
 Route::get('projeto/cadastrar', 'ProjetoController@cadastrar');

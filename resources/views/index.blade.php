@@ -1,13 +1,5 @@
 @extends('layouts.master')
 
-@section('header')
-    <h2>Bem vindo ao Fincol!</h2>
-    <a href="{{ url('/') }}">Inicio </a>
-    <a href="{{ url('projeto/pesquisar') }}">Pesquisar </a>
-    <a href="{{ url('usuario/login') }}">Login </a>
-    <a href="{{ url('usuario/cadastrar') }}">Cadastrar </a>
-@stop
-
 @section('content')
     Projetos recentes:
     @if (isset($proj))
