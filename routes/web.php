@@ -19,6 +19,8 @@ Route::get('about', function () {
 
 Route::get('usuario/cadastrar', 'UsuarioController@cadastrar');
 
+Route::post('usuario/cadastrar', 'UsuarioController@salvar');
+
 Route::get('usuario/login', 'UsuarioController@login');
 
 Route::get('projeto/{id}', 'ProjetoController@show')->where('id', '[0-9]+');
