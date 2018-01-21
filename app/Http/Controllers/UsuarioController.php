@@ -33,7 +33,7 @@ class UsuarioController extends Controller {
 
     public function login () {
         if (array_key_exists('logado', $_SESSION) && $_SESSION['logado'] == true) {
-            $_SESSION['logado'] == false;
+            $_SESSION['logado'] = false;
             return redirect('/');
         }
         else {
@@ -49,7 +49,7 @@ class UsuarioController extends Controller {
 
         if (sizeof($results) == 1) {
             if ($results[0]->senha == $senha) {
-                $_SESSION['logado'] = True;
+                $_SESSION['logado'] = true;
                 $_SESSION['id']     = $results[0]->id;
 
                 return redirect('/');

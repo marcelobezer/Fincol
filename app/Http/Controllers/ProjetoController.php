@@ -2,30 +2,65 @@
 
 namespace Fincol\Http\Controllers;
 
+session_start();
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
 use Fincol\Projeto;
 
 class ProjetoController extends Controller {
 
     public function show ($id) {
-        $proj = Fincol\Projeto::find($id);
+        $proj = Projeto::find($id);
         return view('projeto.projeto')->with('proj', $proj);
     }
 
     public function cadastrar () {
-        return view('projeto.cadastrar');
-        $proj = new Projeto;
-        $proj->descricao = Input::get('descricao');
-        $proj->custo = Input::get('custo');
-        $proj->duracao = Input::get('duracao');
+        if (array_key_exists('logado', $_SESSION) && $_SESSION['logado'] == true)
+            return view('projeto.cadastrar');
+        else
+            return redirect('usuario/login');
+    }
+
+    public function cadastro () {
+        $proj             =   new Projeto;
+        $proj->titulo     =   Input::get('titulo');
+        $proj->descricao  =   Input::get('descricao');
+        $proj->custo      =   Input::get('custo');
+        $proj->duracao    =   Input::get('duracao');
         $proj->save();
+
+        return redirect('/');
+
     }
 
     public function pesquisar () {
         return view('projeto.pesquisar');
     }
 
+    public function pesquisa () {
+        $palavrachave   =   Input::get('palavra');
+        $results        =   DB::select('select * from projetos');
+        $l              =   array();
+
+        foreach ($results as $r) {
+            if (stristr($r->titulo, $palavrachave) || stristr($r->descricao, $palavrachave)) {
+                array_push($l, $r);
+            }
+        }
+
+        return view('projeto.pesquisar')->with('p', $l);
+    }
+
     public function apoiar ($id) {
+        if (array_key_exists('logado', $_SESSION) && $_SESSION['logado'] == true)
+            return view('projeto.apoiar', ['id' => $id]);
+        else
+            return redirect('usuario/login');
+    }
+
+    public function apoio ($id) {
         return view('projeto.apoiar')->with('id', $id);
     }
 

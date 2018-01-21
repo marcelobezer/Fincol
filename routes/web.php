@@ -29,9 +29,15 @@ Route::get('projeto/{id}', 'ProjetoController@show')->where('id', '[0-9]+');
 
 Route::get('projeto/cadastrar', 'ProjetoController@cadastrar');
 
+Route::post('projeto/cadastrar', 'ProjetoController@cadastro');
+
 Route::get('projeto/pesquisar', 'ProjetoController@pesquisar');
 
+Route::post('projeto/pesquisar', 'ProjetoController@pesquisa');
+
 Route::get('projeto/apoiar/{id}', 'ProjetoController@apoiar')->where('id', '[0-9]+');
+
+Route::post('projeto/apoiar/{id}', 'ProjetoController@apoio')->where('id', '[0-9]+');
 
 // Auth::routes();
 

@@ -1,32 +1,25 @@
 @extends('layouts.master')
 
-@section('header')
-    <h2>Bem vindo ao Fincol!</h2>
-    <a href="{{ url('/') }}">Inicio </a>
-    <a href="{{ url('projeto/pesquisar') }}">Pesquisar </a>
-    <a href="{{ url('usuario/login') }}">Login </a>
-    <a href="{{ url('usuario/cadastrar') }}">Cadastrar </a>
-@stop
-
 @section('content')
     @if(isset($proj))
+        <strong> {{ $proj->titulo }} </strong> <br>
         Descrição:
         <div>
-            $proj->decricao
-        </div>
+            {{ $proj->descricao }}
+        </div> <br>
         Custo:
         <div>
-            $proj->custo
-        </div>
+            {{ $proj->custo }}
+        </div> <br>
         Duração:
         <div>
-            $proj->duracao meses
-        </div>
+            {{ $proj->duracao }} (meses)
+        </div> <br>
         <div>
             <a href="{{ url('projeto/apoiar/'.$proj->id) }}"
                class="btn btn-primary pull-right">Apoiar</a>
         </div>
     @else
-        Nada encontrado :/
+        Nada encontrado
     @endif
 @stop

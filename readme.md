@@ -30,6 +30,7 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
 ## About the Controllers
 
 |**Method**	| **Route**					| **Description**	|
+|-----------|---------------------------|-------------------|
 | GET		| /							|					|
 | GET		| /usuario/login			|					|
 | GET		| /usuario/cadastrar		|					|
