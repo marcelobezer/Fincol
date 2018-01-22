@@ -73,6 +73,8 @@ class ProjetoController extends Controller {
     }
 
     public function apoio () {
+        if (!array_key_exists('logado', $_SESSION) || $_SESSION['logado'] == false)
+            return redirect('usuario/login');
         $apoi               =   new Apoio;
         $apoi->valor        =   Input::get('valor');
         $apoi->id_usuario   =   $_SESSION['id'];

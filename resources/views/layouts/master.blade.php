@@ -3,23 +3,34 @@
     <head>
         <meta charset="utf-8" />
         <title>Fincol</title>
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <script defer src="//use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css" crossorigin="anonymous" />
     </head>
     <body>
+    <header class="container">
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                Fincol
+            </div>
+            <div class="navbar-menu">
+                <a class="navbar-item" href="{{ url('/') }}">Inicio </a>
+                <a class="navbar-item" href="{{ url('projeto/pesquisar') }}">Pesquisar </a>
+                <a class="navbar-item" href="{{ url('projeto/cadastrar')  }}">Projeto </a>
+                @php
+                    $v = "Login";
+                    if(array_has($_SESSION, 'logado'))
+                        if($_SESSION['logado'])
+                            $v = "Logout";
+                    echo "<a class=\"navbar-item\" href=\"" . url('usuario/login') . "\"> $v </a>";
+                    if($v == "Login")
+                    echo "<a class=\"navbar-item\" href=\"" . url('usuario/cadastrar') . "\">Cadastrar </a>";
+                @endphp
+            </div>
+        </nav>
+
+    </header>
     <div class="container">
-        <a class="page-header">
-            <h2>Bem vindo ao Fincol!</h2>
-            <a href="{{ url('/') }}">Inicio </a>
-            <a href="{{ url('projeto/pesquisar') }}">Pesquisar </a>
-            <a href="{{ url('projeto/cadastrar')  }}">Projeto </a>
-            @if(Session::has('logado') && Session::get('logado'))
-                <a href="{{ url('usuario/login') }}">Logout </a>
-            @else
-                <a href="{{ url('usuario/login') }}">Login </a>
-            @endif
-            <a href="{{ url('usuario/cadastrar') }}">Cadastrar </a>
-        </a>
-        <br> <br>
         <div>
             @yield('content')
         </div>

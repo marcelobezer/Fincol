@@ -2,29 +2,43 @@
 
 @section('content')
     @if(isset($myt))
-        <br>
-        <strong> {{ $myt['projeto']->titulo }} </strong> <br>
-        <br>
-        Descrição:
+        <h2 class="title" align="center">{{ $myt['projeto']->titulo }}</h2>
         <div>
-            {{ $myt['projeto']->descricao }}
-        </div> <br>
-        Custo:
+            <h4 class="title is-4">Descrição:</h4>
+            <h5 class="subtitle is-6">{{ $myt['projeto']->descricao }}</h5>
+        </div>
         <div>
-            {{ $myt['projeto']->custo }}
-        </div> <br>
-        Duração:
+            <h4 class="title is-4" style="margin-top: 10px">Custo:</h4>
+            <h5 class="subtitle is-6">{{ $myt['projeto']->custo }}</h5>
+        </div>
         <div>
-            {{ $myt['projeto']->duracao }} (meses)
-        </div> <br>
-        <br>
-        Arrecadado até agora:
+            <h4 class="title is-4" style="margin-top: 10px">Duração:</h4>
+            <h5 class="subtitle is-6">{{ $myt['projeto']->duracao }}</h5>
+        </div>
         <div>
-            {{ $myt['total'] }}
-        </div> <br>
-        <div>
-            <a href="{{ url('projeto/apoiar/'.$myt['projeto']->id) }}"
-               class="btn btn-primary pull-right">Apoiar</a>
+            <h4 class="title is-4" style="margin-top: 10px">Arrecadado até agora:</h4>
+            <h5 class="subtitle is-6">{{ $myt['total'] }}</h5>
+        </div>
+        <hr>
+        <div style="margin-top: 15px">
+            <h3 class="subtitle">Apoie agora:</h3>
+            <form action="{{ action('ProjetoController@apoio') }}" method="post">
+                <div class="field is-horizontal">
+                    <div class="field-label"><label class="label">Valor:</label></div>
+                    <div class="field-body">
+                        <div class="field">
+                            <p class="control is-expanded">
+                                <input class="input" type="number" name="valor" required max="9999999999" min="0.1" step="0.1">
+                            </p>
+                        </div>
+                    </div>
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button class="button is-link">Apoiar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     @else
         Nada encontrado
