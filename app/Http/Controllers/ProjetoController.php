@@ -13,7 +13,18 @@ class ProjetoController extends Controller {
 
     public function show ($id) {
         $proj = Projeto::find($id);
-        return view('projeto.projeto')->with('proj', $proj);
+        $apoi = DB::select('select * from apoios where id_projeto = :id', ['id' => $proj->id]);
+        $tota = 0;
+
+        foreach ($apoi as $a) {
+            $tota += $a->valor;
+        }
+
+        $myt = array();
+        $myt['projeto'] = $proj;
+        $myt['total'] = $tota;
+
+        return view('projeto.projeto')->with('myt', $myt);
     }
 
     public function cadastrar () {
@@ -55,7 +66,7 @@ class ProjetoController extends Controller {
 
     public function apoiar ($id) {
         if (array_key_exists('logado', $_SESSION) && $_SESSION['logado'] == true)
-            return view('projeto.apoiar', ['id' => $id]);
+            return view('projeto.apoiar');
         else
             return redirect('usuario/login');
     }

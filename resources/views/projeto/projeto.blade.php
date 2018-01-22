@@ -1,22 +1,27 @@
 @extends('layouts.master')
 
 @section('content')
-    @if(isset($proj))
-        <strong> {{ $proj->titulo }} </strong> <br>
+    @if(isset($myt))
+        <strong> {{ $myt['projeto']->titulo }} </strong> <br>
         Descrição:
         <div>
-            {{ $proj->descricao }}
+            {{ $myt['projeto']->descricao }}
         </div> <br>
         Custo:
         <div>
-            {{ $proj->custo }}
+            {{ $myt['projeto']->custo }}
         </div> <br>
         Duração:
         <div>
-            {{ $proj->duracao }} (meses)
+            {{ $myt['projeto']->duracao }} (meses)
+        </div> <br>
+        <br>
+        Arrecadado até agora:
+        <div>
+            {{ $myt['total'] }}
         </div> <br>
         <div>
-            <a href="{{ url('projeto/apoiar/'.$proj->id) }}"
+            <a href="{{ url('projeto/apoiar/'.$myt['projeto']->id) }}"
                class="btn btn-primary pull-right">Apoiar</a>
         </div>
     @else
