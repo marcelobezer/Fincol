@@ -2,6 +2,7 @@
 
 @section('content')
     Projetos recentes:
+    <br> <br>
     @if (sizeof($proj) == 0)
         <br> <br> Ainda não há projetos.
     @else

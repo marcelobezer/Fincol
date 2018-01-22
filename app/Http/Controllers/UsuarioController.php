@@ -45,7 +45,7 @@ class UsuarioController extends Controller {
         $login      =   Input::get('login');
         $senha      =   hash('sha256', Input::get('senha'));
         $results    =   DB::select('select * from usuarios 
-                            where nome = :nome', ['nome' => $login]);
+                            where login = :nome', ['nome' => $login]);
 
         if (sizeof($results) == 1) {
             if ($results[0]->senha == $senha) {

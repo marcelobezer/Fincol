@@ -2,7 +2,9 @@
 
 @section('content')
     @if(isset($myt))
+        <br>
         <strong> {{ $myt['projeto']->titulo }} </strong> <br>
+        <br>
         Descrição:
         <div>
             {{ $myt['projeto']->descricao }}

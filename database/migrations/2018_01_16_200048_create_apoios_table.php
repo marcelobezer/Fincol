@@ -17,7 +17,7 @@ class CreateApoiosTable extends Migration
             $table->increments('id');
             $table->integer('id_projeto');
             $table->integer('id_usuario');
-            $table->double('valor', 6, 2);
+            $table->double('valor', 12, 2);
             $table->timestamps();
         });
     }

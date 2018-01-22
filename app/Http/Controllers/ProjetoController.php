@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 use Fincol\Projeto;
+use Fincol\Apoio;
 
 class ProjetoController extends Controller {
 
@@ -65,14 +66,20 @@ class ProjetoController extends Controller {
     }
 
     public function apoiar ($id) {
-        if (array_key_exists('logado', $_SESSION) && $_SESSION['logado'] == true)
-            return view('projeto.apoiar');
-        else
+        if (!array_key_exists('logado', $_SESSION) || $_SESSION['logado'] == false)
             return redirect('usuario/login');
+        $_SESSION['id_projeto'] = $id;
+        return view('projeto.apoiar')->with('id', $id);
     }
 
-    public function apoio ($id) {
-        return view('projeto.apoiar')->with('id', $id);
+    public function apoio () {
+        $apoi               =   new Apoio;
+        $apoi->valor        =   Input::get('valor');
+        $apoi->id_usuario   =   $_SESSION['id'];
+        $apoi->id_projeto   =   $_SESSION['id_projeto'];
+        $apoi->save();
+
+        return redirect('projeto/'.$_SESSION['id_projeto']);
     }
 
 }

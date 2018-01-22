@@ -1,42 +1,67 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
 
-## About Laravel
+## About this project
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+This project is a college assignment to create a collective funding web application using Laravel 5.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## About Migrations
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
++------------+------------------+------+-----+---------+----------------+
+| Field      | Type             | Null | Key | Default | Extra          |
++------------+------------------+------+-----+---------+----------------+
+| id         | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
+| login      | varchar(16)      | NO   | UNI | NULL    |                |
+| senha      | varchar(64)      | NO   |     | NULL    |                |
+| nome       | varchar(50)      | NO   |     | NULL    |                |
+| created_at | timestamp        | YES  |     | NULL    |                |
+| updated_at | timestamp        | YES  |     | NULL    |                |
++------------+------------------+------+-----+---------+----------------+
 
-## Learning Laravel
++------------+------------------+------+-----+---------+----------------+
+| Field      | Type             | Null | Key | Default | Extra          |
++------------+------------------+------+-----+---------+----------------+
+| id         | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
+| titulo     | varchar(50)      | NO   |     | NULL    |                |
+| descricao  | varchar(5000)    | NO   |     | NULL    |                |
+| custo      | double(12,2)     | NO   |     | NULL    |                |
+| duracao    | int(11)          | NO   |     | NULL    |                |
+| created_at | timestamp        | YES  |     | NULL    |                |
+| updated_at | timestamp        | YES  |     | NULL    |                |
++------------+------------------+------+-----+---------+----------------+
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
++------------+------------------+------+-----+---------+----------------+
+| Field      | Type             | Null | Key | Default | Extra          |
++------------+------------------+------+-----+---------+----------------+
+| id         | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
+| id_projeto | int(11)          | NO   |     | NULL    |                |
+| id_usuario | int(11)          | NO   |     | NULL    |                |
+| valor      | double(12,2)     | NO   |     | NULL    |                |
+| created_at | timestamp        | YES  |     | NULL    |                |
+| updated_at | timestamp        | YES  |     | NULL    |                |
++------------+------------------+------+-----+---------+----------------+
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+## About the Routes and Controllers
 
-## About the Controllers
-
-|**Method**	| **Route**					| **Description**	|
-|-----------|---------------------------|-------------------|
-| GET		| /							|					|
-| GET		| /usuario/login			|					|
-| GET		| /usuario/cadastrar		|					|
-| GET		| /projeto/:id				|					|
-| GET		| /projeto/cadastrar		|					|
-| GET		| /projeto/apoiar/:id		|					|
-| GET		| /projeto/pesquisar/:term	|					|
++-----------+---------------------------+-------------------+-------------------+
+| **Verb**	| **Path**					| **Action**		| **Route Name** 	|
++-----------+---------------------------+-------------------+-------------------+
+| GET		| /usuario/index			| index				| usuario.index		|
+| GET		| /usuario/login			| login				| usuario.login		|
+| POST		| /usuario/login			| authorizer		| usuario.verificar	|
+| GET		| /usuario/cadastrar		| create user		| usuario.cadastrar	|
+| POST		| /usuario/cadastrar		| store user		| usuario.salvar	|
+| GET		| /projeto/{id}				| show project		| projeto.projeto	|
+| GET		| /projeto/cadastrar		| create project	| projeto.cadastrar	|
+| POST		| /projeto/cadastrar		| store project		| projeto.cadastro	|
+| GET		| /projeto/apoiar/{id}		| create funding	| projeto.apoiar	|
+| POST		| /projeto/apoiar/			| store funding		| projeto.apoio		|
+| GET		| /projeto/pesquisar		| search project	| projeto.pesquisar	|
+| POST		| /projeto/pesquisar		| performs search	| projeto.pesquisar	|
+| GET		| /about					| about				| about				|
++-----------+---------------------------+-------------------+-------------------+
 	
+
+
+
+
 
